@@ -60,6 +60,15 @@ jobs:
         run: mvn -B -f ./pom.xml clean package
       - name: Run Code Quality Analysis do módulo api-gateway
         run: mvn -B -f ./pom.xml jacoco:report
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./target/site/jacoco/jacoco.xml
+          flags: api-gateway
+          name: api-gateway
+          fail_ci_if_error: false
+          verbose: true
       - name: Upload Coverage Report do módulo api-gateway
         uses: actions/upload-artifact@v6
         with:
