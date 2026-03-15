@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  id-token: write
+  
 jobs:
   code-quality-api-gateway:
     name: Lint do módulo api-gateway
@@ -20,8 +24,8 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       
-      #- name: Run spotless check
-      #  run: mvn -B -f ./pom.xml spotless:check
+      - name: Run spotless check
+        run: mvn -B -f ./pom.xml spotless:check
         
       - name: Run Checkstyle
         run: mvn -B -f ./pom.xml checkstyle:check
@@ -63,8 +67,8 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./target/site/jacoco/jacoco.xml
+          use_oidc: true
+          files: target/site/jacoco/jacoco.xml
           flags: api-gateway
           name: api-gateway
           fail_ci_if_error: false
