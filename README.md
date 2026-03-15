@@ -6,7 +6,7 @@
 ![Eureka Client](https://img.shields.io/badge/Eureka-Client-E50914?logo=netflix&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-3.9%2B-C71A36?logo=apachemaven&logoColor=white)
 ![JaCoCo](https://img.shields.io/badge/JaCoCo-Coverage-success)
-![Codecov](https://img.shields.io/badge/Codecov-enabled-F01F7A?logo=codecov&logoColor=white)
+[![Codecov](https://codecov.io/gh/leoalmeida/api-gateway/branch/main/graph/badge.svg?flag=api-gateway)](https://codecov.io/gh/leoalmeida/api-gateway) 
 
 [PT-BR](README.md) | [EN](README.en.md)
 
