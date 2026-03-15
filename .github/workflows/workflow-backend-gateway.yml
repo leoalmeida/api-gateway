@@ -21,25 +21,25 @@ jobs:
           cache: 'maven'
       
       #- name: Run spotless check
-      #  run: mvn -B -f api-gateway/pom.xml spotless:check
+      #  run: mvn -B -f ./pom.xml spotless:check
         
       - name: Run Checkstyle
-        run: mvn -B -f api-gateway/pom.xml checkstyle:check
+        run: mvn -B -f ./pom.xml checkstyle:check
 
       - name: Generate Checkstyle report
-        run: mvn -B -f api-gateway/pom.xml checkstyle:checkstyle
+        run: mvn -B -f ./pom.xml checkstyle:checkstyle
 
       - name: Run PMD check
-        run: mvn -B -f api-gateway/pom.xml pmd:check
+        run: mvn -B -f ./pom.xml pmd:check
 
       - name: generate PMD report
-        run: mvn -B -f api-gateway/pom.xml pmd:pmd
+        run: mvn -B -f ./pom.xml pmd:pmd
       
       - name: Run spotbugs check
-        run: mvn -B -f api-gateway/pom.xml spotbugs:check
+        run: mvn -B -f ./pom.xml spotbugs:check
 
       - name: Generate SpotBugs report
-        run: mvn -B -f api-gateway/pom.xml spotbugs:spotbugs
+        run: mvn -B -f ./pom.xml spotbugs:spotbugs
   
   test-gateway:
     needs: [code-quality-api-gateway]
@@ -57,14 +57,14 @@ jobs:
           cache: 'maven'
   
       - name: Roda os testes do módulo api-gateway
-        run: mvn -B -f api-gateway/pom.xml clean package
+        run: mvn -B -f ./pom.xml clean package
       - name: Run Code Quality Analysis do módulo api-gateway
-        run: mvn -B -f api-gateway/pom.xml jacoco:report
+        run: mvn -B -f ./pom.xml jacoco:report
       - name: Upload Coverage Report do módulo api-gateway
         uses: actions/upload-artifact@v6
         with:
           name: coverage-report
-          path: api-gateway/target/site/jacoco/
+          path: ./target/site/jacoco/
           retention-days: 1
 
   build-gateway:
@@ -79,13 +79,13 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build api-gateway module
-        run: mvn -B -f api-gateway/pom.xml clean package -DskipTests
+        run: mvn -B -f ./pom.xml clean package -DskipTests
       
       - name: Upload Backend Artifact
         uses: actions/upload-artifact@v6
         with:
           name: api-gateway-jar
-          path: api-gateway/target/*.jar
+          path: ./target/*.jar
           retention-days: 1
   
   #docker:
